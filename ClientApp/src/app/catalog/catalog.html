@@ -1,6 +1,10 @@
 <header class="site">
   <h1>🐟 Fish Finder</h1>
-  <p>Browse the catalog and ask the guide anything.</p>
+  @if (chatEnabled) {
+    <p>Browse the catalog and ask the guide anything.</p>
+  } @else {
+    <p>Browse the catalog. (This is a static demo — the chat guide needs a live server.)</p>
+  }
 </header>
 
 <div class="wrap">
