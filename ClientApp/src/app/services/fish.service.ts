@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { Fish, FishInput } from '../models/fish';
 import { AdminService } from './admin.service';
 
@@ -10,6 +11,10 @@ export class FishService {
   private admin = inject(AdminService);
 
   list(): Observable<Fish[]> {
+    // The GitHub Pages build has no backend — read the bundled snapshot instead.
+    if (environment.staticDemo) {
+      return this.http.get<Fish[]>('fish-data.json');
+    }
     return this.http.get<Fish[]>('/api/fish');
   }
 

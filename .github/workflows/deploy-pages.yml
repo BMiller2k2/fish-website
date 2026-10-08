@@ -1,0 +1,63 @@
+name: Deploy static demo to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "ClientApp/**"
+      - ".github/workflows/deploy-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: ClientApp/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ClientApp
+        run: npm ci
+
+      - name: Build the static demo (catalog only, no backend)
+        working-directory: ClientApp
+        run: npm run build:demo
+
+      # GitHub Pages serves 404.html for any unmatched path. Copying
+      # index.html there lets the Angular router handle deep links / refreshes
+      # instead of showing a real 404 for routes like /some-fish.
+      - name: Add SPA fallback + disable Jekyll processing
+        working-directory: ClientApp/dist/github-pages
+        run: |
+          cp index.html 404.html
+          touch .nojekyll
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ClientApp/dist/github-pages
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

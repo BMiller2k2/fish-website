@@ -7,6 +7,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
+import { environment } from '../../environments/environment';
 import { FishService } from '../services/fish.service';
 import { Fish } from '../models/fish';
 import { ChatWidget } from '../chat-widget/chat-widget';
@@ -18,6 +19,10 @@ import { ChatWidget } from '../chat-widget/chat-widget';
 })
 export class Catalog implements OnInit {
   private fishService = inject(FishService);
+
+  // No backend on the GitHub Pages build, so there's nothing for the chat
+  // widget to call — hide it there instead of shipping a feature that errors.
+  readonly chatEnabled = !environment.staticDemo;
 
   readonly all = signal<Fish[]>([]);
   readonly search = signal('');

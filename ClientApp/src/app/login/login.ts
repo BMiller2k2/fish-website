@@ -1,6 +1,7 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { environment } from '../../environments/environment';
 import { AdminService } from '../services/admin.service';
 
 @Component({
@@ -18,6 +19,12 @@ export class Login implements OnInit {
   readonly busy = signal(false);
 
   ngOnInit(): void {
+    // No backend on the GitHub Pages build - there's nothing to sign in to.
+    if (environment.staticDemo) {
+      this.router.navigateByUrl('/');
+      return;
+    }
+
     this.token = this.admin.token();
     this.admin
       .config()

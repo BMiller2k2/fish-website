@@ -1,10 +1,10 @@
 # secrets
 .env
 
-# SQLite database (and its WAL sidecar files)
-data/*.db
-data/*.db-shm
-data/*.db-wal
+# SQLite database (and its WAL sidecar files) - root data/ and legacy/data/
+**/data/*.db
+**/data/*.db-shm
+**/data/*.db-wal
 
 # .NET
 bin/
@@ -13,8 +13,12 @@ obj/
 
 # Angular build output (generated into wwwroot by `ng build`)
 /wwwroot/
+ClientApp/dist/
 
 # Angular / Node
 node_modules/
 ClientApp/.angular/
 npm-debug.log*
+
+# scratch
+.tmp/
