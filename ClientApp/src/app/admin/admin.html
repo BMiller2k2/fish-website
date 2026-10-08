@@ -1,0 +1,77 @@
+<header class="site">
+  <h1>Manage fish</h1>
+  <p>
+    <a routerLink="/">← Back to the catalog</a>
+    &middot; <a href="#" (click)="$event.preventDefault(); signOut()">Sign out</a>
+  </p>
+</header>
+
+<div class="wrap" style="max-width: 760px">
+  @if (notice(); as n) {
+    <div class="notice" [class.ok]="n.ok" [class.bad]="!n.ok">{{ n.text }}</div>
+  }
+
+  <form class="admin-form" (submit)="$event.preventDefault(); save()">
+    <label>
+      Name *
+      <input name="name" required placeholder="Clownfish" [(ngModel)]="form.name" />
+    </label>
+    <div class="row">
+      <label>
+        Scientific name
+        <input name="scientificName" placeholder="Amphiprion ocellaris" [(ngModel)]="form.scientificName" />
+      </label>
+      <label>
+        Size
+        <input name="size" placeholder="8–11 cm (3–4 in)" [(ngModel)]="form.size" />
+      </label>
+    </div>
+    <label>
+      Image URL
+      <input name="imageUrl" type="url" placeholder="https://…/clownfish.jpg" [(ngModel)]="form.imageUrl" />
+    </label>
+    <label>
+      Habitat
+      <input name="habitat" placeholder="Coral reefs of the Indian and Pacific Oceans" [(ngModel)]="form.habitat" />
+    </label>
+    <label>
+      Diet
+      <input name="diet" placeholder="Omnivore — algae, plankton, crustaceans" [(ngModel)]="form.diet" />
+    </label>
+    <label>
+      Description
+      <textarea name="description" rows="3" placeholder="A short overview of the fish." [(ngModel)]="form.description"></textarea>
+    </label>
+    <label>
+      Fun facts (one per line)
+      <textarea name="facts" rows="3" placeholder="All clownfish are born male.&#10;They rarely leave their home anemone." [(ngModel)]="form.facts"></textarea>
+    </label>
+    <div class="actions">
+      <button type="submit">{{ editingId() ? 'Save changes' : 'Add fish' }}</button>
+      @if (editingId()) {
+        <button type="button" class="ghost" (click)="resetForm()">Cancel edit</button>
+      }
+    </div>
+  </form>
+
+  <h2>Catalog</h2>
+  <div class="admin-list">
+    @for (f of fish(); track f.id) {
+      <div class="admin-row">
+        @if (f.imageUrl) {
+          <img [src]="f.imageUrl" alt="" />
+        } @else {
+          <div style="width: 54px; height: 54px; display: flex; align-items: center; justify-content: center">🐟</div>
+        }
+        <div class="grow">
+          <strong>{{ f.name }}</strong><br />
+          <small>{{ f.scientificName || f.habitat }}</small>
+        </div>
+        <button class="ghost" (click)="edit(f)">Edit</button>
+        <button class="ghost" (click)="remove(f)">Delete</button>
+      </div>
+    } @empty {
+      <p style="color: var(--muted)">No fish yet.</p>
+    }
+  </div>
+</div>

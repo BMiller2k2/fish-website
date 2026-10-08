@@ -1,0 +1,14 @@
+{
+  "name": "fish-website",
+  "version": "1.0.0",
+  "description": "Browse fish and ask an LLM questions about them",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "express": "^4"
+  }
+}

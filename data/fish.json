@@ -1,0 +1,32 @@
+[
+  {
+    "id": "clownfish",
+    "name": "Clownfish",
+    "scientificName": "Amphiprion ocellaris",
+    "habitat": "Warm, shallow waters of the Indian and Pacific Oceans, living among the tentacles of sea anemones on coral reefs.",
+    "diet": "Omnivore — algae, zooplankton, small crustaceans, and leftovers from its host anemone.",
+    "size": "About 8–11 cm (3–4 in) long.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Clownfish_-_Amphiprion_ocellaris_-_%28cropped%29.jpg/640px-Clownfish_-_Amphiprion_ocellaris_-_%28cropped%29.jpg",
+    "description": "A small, bright orange fish with three white bands, famous for its symbiotic relationship with sea anemones. A protective layer of mucus lets it live unharmed among the anemone's stinging tentacles.",
+    "facts": [
+      "All clownfish are born male; the dominant fish in a group becomes female.",
+      "They rarely stray more than a few metres from their home anemone.",
+      "Each group has a strict size-based pecking order."
+    ]
+  },
+  {
+    "id": "betta",
+    "name": "Siamese Fighting Fish",
+    "scientificName": "Betta splendens",
+    "habitat": "Shallow, slow-moving fresh water in Southeast Asia — rice paddies, floodplains, and drainage ditches in Thailand, Cambodia, and Vietnam.",
+    "diet": "Carnivore — insects and insect larvae at the water surface in the wild; pellets and frozen foods in aquariums.",
+    "size": "Around 6–7 cm (2.5–3 in), not counting the fins.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Betta_splendens_-_2013.jpg/640px-Betta_splendens_-_2013.jpg",
+    "description": "A freshwater fish prized for its flowing fins and vivid colours. Males are highly territorial and will flare their gills and fins at rivals, which is how the species got its common name.",
+    "facts": [
+      "Bettas have a labyrinth organ that lets them breathe air directly from the surface.",
+      "Males build bubble nests at the surface to hold the eggs.",
+      "Wild bettas are far duller in colour than the aquarium-bred varieties."
+    ]
+  }
+]

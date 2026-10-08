@@ -1,0 +1,38 @@
+<header class="site">
+  <h1>Admin sign in</h1>
+  <p><a routerLink="/">← Back to the catalog</a></p>
+</header>
+
+<div class="wrap" style="max-width: 420px">
+  @if (error()) {
+    <div class="notice bad">{{ error() }}</div>
+  }
+
+  <form
+    class="admin-form"
+    style="grid-template-columns: 1fr"
+    (submit)="$event.preventDefault(); submit()"
+  >
+    @if (tokenRequired()) {
+      <label>
+        Admin token
+        <input
+          type="password"
+          name="token"
+          autocomplete="current-password"
+          placeholder="Paste the server's ADMIN_TOKEN"
+          [(ngModel)]="token"
+        />
+      </label>
+    } @else {
+      <p style="margin: 0; font-size: 0.85rem; color: var(--muted)">
+        This server has no ADMIN_TOKEN set, so sign-in isn't required for local development.
+      </p>
+    }
+    <div class="actions">
+      <button type="submit" [disabled]="busy()">
+        {{ tokenRequired() ? 'Sign in' : 'Continue to admin' }}
+      </button>
+    </div>
+  </form>
+</div>

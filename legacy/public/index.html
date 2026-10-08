@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fish Finder</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header class="site">
+      <h1>🐟 Fish Finder</h1>
+      <p>Browse the catalog and ask the guide anything.</p>
+    </header>
+
+    <div class="wrap">
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="Search by name, habitat, diet…" />
+        <span id="count" style="color: var(--muted)"></span>
+      </div>
+
+      <div id="grid" class="grid"></div>
+      <div id="empty" class="empty" hidden>
+        No fish in the catalog yet. Check back soon.
+      </div>
+    </div>
+
+    <dialog id="detail">
+      <div class="dlg-body" id="detail-body"></div>
+    </dialog>
+
+    <button id="chat-toggle" class="chat-toggle" hidden>💬 Ask the fish guide</button>
+
+    <section id="chat-panel" class="chat-panel collapsed">
+      <header id="chat-header" title="Click to collapse or expand">
+        <span>Fish guide</span>
+        <span class="chat-header-actions">
+          <button class="ghost" id="chat-collapse" aria-label="Collapse chat">⌄</button>
+          <button class="ghost" id="chat-close" aria-label="Close chat">✕</button>
+        </span>
+      </header>
+      <div id="chat-log" class="chat-log"></div>
+      <form id="chat-form" class="chat-input">
+        <input id="chat-text" type="text" autocomplete="off" placeholder="e.g. Which fish can breathe air?" />
+        <button type="submit" id="chat-send">Send</button>
+      </form>
+    </section>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

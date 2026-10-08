@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fish Finder — Admin sign in</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header class="site">
+      <h1>Admin sign in</h1>
+      <p><a href="/">← Back to the catalog</a></p>
+    </header>
+
+    <div class="wrap" style="max-width: 420px">
+      <div id="notice" class="notice" hidden></div>
+
+      <form id="login-form" class="admin-form" style="grid-template-columns: 1fr">
+        <label>
+          Admin token
+          <input
+            id="token"
+            type="password"
+            autocomplete="current-password"
+            placeholder="Paste the server's ADMIN_TOKEN"
+          />
+        </label>
+        <p id="hint" style="margin: 0; font-size: 0.85rem; color: var(--muted)" hidden></p>
+        <div class="actions">
+          <button type="submit" id="submit">Sign in</button>
+        </div>
+      </form>
+    </div>
+
+    <script src="/login.js"></script>
+  </body>
+</html>

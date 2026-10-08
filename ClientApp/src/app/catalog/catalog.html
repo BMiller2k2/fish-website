@@ -1,0 +1,83 @@
+<header class="site">
+  <h1>🐟 Fish Finder</h1>
+  <p>Browse the catalog and ask the guide anything.</p>
+</header>
+
+<div class="wrap">
+  <div class="toolbar">
+    <input
+      type="search"
+      placeholder="Search by name, habitat, diet…"
+      [value]="search()"
+      (input)="onSearch($any($event.target).value)"
+    />
+    <span style="color: var(--muted)">
+      @if (all().length) {
+        {{ filtered().length }} of {{ all().length }} fish
+      }
+    </span>
+  </div>
+
+  @if (all().length === 0) {
+    <div class="empty">No fish in the catalog yet. Check back soon.</div>
+  } @else {
+    <div class="grid">
+      @for (f of filtered(); track f.id) {
+        <button class="card" (click)="open(f)">
+          @if (f.imageUrl && !broken().has(f.id)) {
+            <img class="photo" [src]="f.imageUrl" [alt]="f.name" (error)="markBroken(f.id)" />
+          } @else {
+            <div class="photo placeholder">🐟</div>
+          }
+          <div class="body">
+            <h3>{{ f.name }}</h3>
+            @if (f.scientificName) {
+              <span class="sci">{{ f.scientificName }}</span>
+            }
+            @if (f.description) {
+              <p class="desc">{{ f.description }}</p>
+            }
+          </div>
+        </button>
+      }
+    </div>
+  }
+</div>
+
+<dialog #detail (click)="onBackdrop($event)">
+  <div class="dlg-body">
+    @if (selected(); as f) {
+      @if (f.imageUrl && !broken().has(f.id)) {
+        <img [src]="f.imageUrl" [alt]="f.name" (error)="markBroken(f.id)" />
+      }
+      <h2>{{ f.name }}</h2>
+      @if (f.scientificName) {
+        <span class="sci">{{ f.scientificName }}</span>
+      }
+      @if (f.description) {
+        <p>{{ f.description }}</p>
+      }
+      @if (detailRows(f).length) {
+        <dl>
+          @for (row of detailRows(f); track row.label) {
+            <dt>{{ row.label }}</dt>
+            <dd>{{ row.value }}</dd>
+          }
+        </dl>
+      }
+      @if (f.facts.length) {
+        <strong>Did you know?</strong>
+        <ul>
+          @for (fact of f.facts; track $index) {
+            <li>{{ fact }}</li>
+          }
+        </ul>
+      }
+      <div class="close-row">
+        <button class="ghost" (click)="close()">Close</button>
+      </div>
+    }
+  </div>
+</dialog>
+
+<app-chat-widget />

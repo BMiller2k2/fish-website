@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fish Finder — Manage</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header class="site">
+      <h1>Manage fish</h1>
+      <p>
+        <a href="/">← Back to the catalog</a>
+        &middot; <a href="#" id="signout">Sign out</a>
+      </p>
+    </header>
+
+    <div class="wrap" style="max-width: 760px">
+      <div id="notice" class="notice" hidden></div>
+
+      <form id="form" class="admin-form">
+        <input type="hidden" id="editing" />
+        <label>Name *
+          <input id="name" type="text" required placeholder="Clownfish" />
+        </label>
+        <div class="row">
+          <label>Scientific name
+            <input id="scientificName" type="text" placeholder="Amphiprion ocellaris" />
+          </label>
+          <label>Size
+            <input id="size" type="text" placeholder="8–11 cm (3–4 in)" />
+          </label>
+        </div>
+        <label>Image URL
+          <input id="imageUrl" type="url" placeholder="https://…/clownfish.jpg" />
+        </label>
+        <label>Habitat
+          <input id="habitat" type="text" placeholder="Coral reefs of the Indian and Pacific Oceans" />
+        </label>
+        <label>Diet
+          <input id="diet" type="text" placeholder="Omnivore — algae, plankton, crustaceans" />
+        </label>
+        <label>Description
+          <textarea id="description" rows="3" placeholder="A short overview of the fish."></textarea>
+        </label>
+        <label>Fun facts (one per line)
+          <textarea id="facts" rows="3" placeholder="All clownfish are born male.&#10;They rarely leave their home anemone."></textarea>
+        </label>
+        <div class="actions">
+          <button type="submit" id="save">Add fish</button>
+          <button type="button" class="ghost" id="cancel" hidden>Cancel edit</button>
+        </div>
+      </form>
+
+      <h2>Catalog</h2>
+      <div id="list" class="admin-list"></div>
+    </div>
+
+    <script src="/admin.js"></script>
+  </body>
+</html>
